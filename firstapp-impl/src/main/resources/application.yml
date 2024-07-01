@@ -1,0 +1,23 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: firstapp
+  datasource:
+    url: jdbc:sqlite:./database.sqlite
+    driver-class-name: org.sqlite.JDBC
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+
+jwt:
+  secret: "3MZ7BDeA3j4p9GXrHYFYNSKfMUs_yxjQPNx#JhFEjj#b7@7mBN#Ifatux4q0bbSMW345A_dRFu0tG3yqdrHCAKVupami2FIIpk3K"
+
+logging:
+  level:
+    org.springframework.security: TRACE
+    org.springframework: DEBUG
+    org.springframework.security.oauth2.server.authorization: TRACE
