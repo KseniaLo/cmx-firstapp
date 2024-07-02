@@ -18,6 +18,7 @@
   * [Hibernate JPA Model Generator (hibernate-jpamodelgen)](#hibernate-jpa-model-generator-hibernate-jpamodelgen)
   * [Lombok](#lombok)
   * [Spring Email](#spring-email)
+  * [JUnit](#junit)
 * [Задание](#задание)
   * [User Service](#user-service)
     * [Описание](#описание)
@@ -314,6 +315,19 @@ Spring Email — это часть Spring Framework, которая предос
 
 - [Spring Boot + Email Integration Example](https://www.baeldung.com/spring-email)
 
+## JUnit
+
+**Описание:**
+JUnit — это популярный фреймворк для написания и выполнения тестов на языке программирования Java. JUnit поддерживает 
+создание тестов, выполнение тестов, сбор и анализ результатов тестирования.
+
+**Полезные ссылки:**
+
+- [JUnit 5 User Guide](https://junit.org/junit5/docs/current/user-guide/)  
+- [Spring Boot Testing](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.testing)  
+- [Testing with Spring Boot](https://spring.io/guides/gs/testing-web/)  
+- [Guide to Testing with Spring Boot](https://www.baeldung.com/spring-boot-testing)
+
 # Задание
 
 **Тема:** Система отправки напоминаний пользователям
@@ -392,7 +406,7 @@ Spring Email — это часть Spring Framework, которая предос
 В сервисе должна быть подключена [Kafka](#apache-kafka) и должен быть сконфигурирован `Producer` для отправки сообщения в топик
 `notification.message.in`.
 
-Покрыть все публичные методы классов в папке service `unit` тестами с помощью JUnit.
+Покрыть все публичные методы классов в папке service `unit` и контроллеры тестами с помощью [JUnit](#junit).
 
 - #### POST /register
   **Входящие данные:** json c данными пользователя, например
@@ -565,7 +579,7 @@ Spring Email — это часть Spring Framework, которая предос
 В сервисе должна быть подключена [Kafka](#apache-kafka) и должен быть сконфигурирован `Producer` для отправки сообщения в топик
 `notification.message.in`.
 
-Покрыть все публичные методы классов в папке service `unit` тестами с помощью JUnit.
+Покрыть все публичные методы классов в папке service `unit` и контроллеры тестами с помощью [JUnit](#junit).
 
 - #### POST /tasks
   **Входящие данные:**  
@@ -714,4 +728,4 @@ Spring Email — это часть Spring Framework, которая предос
 из топика `notification.message.in`.
 В сервис нужно подключить [Lombok](#lombok) и расставить нужные аннотации.
 
-Покрыть все публичные методы классов в папке service `unit` тестами с помощью JUnit.
+Покрыть все публичные методы классов в папке service `unit` тестами с помощью [JUnit](#junit).
