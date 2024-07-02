@@ -29,6 +29,7 @@
     * [REST API](#rest-api-1)
     * [База данных](#база-данных-1)
     * [Подробное описание](#подробное-описание-1)
+    * [Отправка сообщений](#отправка-сообщений)
   * [Notification Service](#notification-service)
     * [Описание](#описание-2)
     * [REST API](#rest-api-2)
@@ -326,6 +327,8 @@ Spring Email — это часть Spring Framework, которая предос
 - Task Service
 - Notification Service
 
+![](005.png)
+
 ## User Service
 
 ### Описание
@@ -534,7 +537,7 @@ Spring Email — это часть Spring Framework, которая предос
    id uuid (обязательное, первичный ключ)
    title text (обязательное)
    description text (необязательное)
-   status varchar(20) (обязательное, варианты значений [CREATED, DONE])
+   status varchar(20) (обязательное, варианты значений [CREATED, DONE, ERROR])
    assignee_id uuid (обязательное, идентификатор пользователя)
    created_at timestamptz (обязательное)
    updated_at timestamptz (обязательное)
@@ -672,6 +675,23 @@ Spring Email — это часть Spring Framework, которая предос
     - HTTP code 401, если не передан [JWT](#jwt-json-web-tokens) токен
     - HTTP code 403, если пользователь не имеет нужной роли
     - HTTP code 500 и описание ошибки, если произошла другая ошибка
+
+### Отправка сообщений
+Реализовать метод отправки сообщений в [Kafka](#apache-kafka) по шедулеру. Использовать `cron` выражения для настройки
+интервала отправки, по умолчанию раз в минуту (вынести параметром в `application.yml`).
+
+**Алгоритм работы:**  
+Получить и заблокировать `n` записей из таблицы `task` со `status = CREATED` . Сформировать сообщения
+в [Kafka](#apache-kafka) и отправить. Если отправка прошла успешно, проставить всем записям `status = DONE`. Сохранить
+изменения в БД и отпустить блокировку, если произошла ошибка, проставить записям `status = ERROR` и отпустить блокировку.  
+Параметр `n` вынести в `application.yml`, по умолчанию 5.
+Блокировку сделать через репозиторий и аннотации
+```java
+@Lock(LockModeType.PESSIMISTIC_WRITE)
+@QueryHints({@QueryHint(name = "javax.persistence.lock.timeout", value = "-2")})
+```
+[Подробнее тут](https://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/chapters/locking/Locking.html#locking-LockMode)
+
 
 ## Notification Service
 
