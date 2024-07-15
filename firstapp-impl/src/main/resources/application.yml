@@ -17,9 +17,3 @@ spring:
 
 jwt:
   secret: "3MZ7BDeA3j4p9GXrHYFYNSKfMUs_yxjQPNx#JhFEjj#b7@7mBN#Ifatux4q0bbSMW345A_dRFu0tG3yqdrHCAKVupami2FIIpk3K"
-
-logging:
-  level:
-    org.springframework.security: TRACE
-    org.springframework: DEBUG
-    org.springframework.security.oauth2.server.authorization: TRACE
