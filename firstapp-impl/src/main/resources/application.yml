@@ -5,13 +5,15 @@ spring:
   application:
     name: firstapp
   datasource:
-    url: jdbc:sqlite:./database.sqlite
-    driver-class-name: org.sqlite.JDBC
+    url: jdbc:postgresql://localhost:5432/firstapp?currentSchema=fa
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 jwt:
   secret: "3MZ7BDeA3j4p9GXrHYFYNSKfMUs_yxjQPNx#JhFEjj#b7@7mBN#Ifatux4q0bbSMW345A_dRFu0tG3yqdrHCAKVupami2FIIpk3K"
