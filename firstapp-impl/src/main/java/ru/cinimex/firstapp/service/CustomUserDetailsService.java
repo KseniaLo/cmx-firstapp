@@ -14,6 +14,7 @@ import ru.cinimex.firstapp.repository.UserRepository;
 
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RequiredArgsConstructor
 @Service
@@ -26,7 +27,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         UserEntity user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        Set<GrantedAuthority> authorities = user.getRoles().stream()
+        Set<GrantedAuthority> authorities = Stream.of(user.getRole())
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toSet());
 
