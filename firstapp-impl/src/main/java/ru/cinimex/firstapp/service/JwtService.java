@@ -3,25 +3,27 @@ package ru.cinimex.firstapp.service;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
+import java.time.OffsetDateTime;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-
+@RequiredArgsConstructor
 @Component
 public class JwtService {
 
     @Value("${jwt.secret}")
-    private String jwtSecret;
+    private final String jwtSecret;
 
     public String generateToken(Authentication authenticate) {
 
@@ -68,8 +70,19 @@ public class JwtService {
         return extractExpiration(token).before(new Date());
     }
 
-    public Boolean validateToken(String token, UserDetails userDetails) {
-        final String userName = extractUserName(token);
-        return (userName.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    public String generateTechToken(OffsetDateTime expiredDate) {
+        final Map<String, Object> claims = new HashMap<>();
+        claims.put("roles", List.of("TECH"));
+        return Jwts.builder()
+                .claims(claims)
+                .subject("tech_user")
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(Date.from(expiredDate.toInstant()))
+                .signWith(getSignKey(), Jwts.SIG.HS256).compact();
+    }
+
+    public List<String> extractRole(String token) {
+        return extractClaim(token,
+                claims -> claims.get("roles", List.class));
     }
 }
