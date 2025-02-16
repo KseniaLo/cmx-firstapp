@@ -8,7 +8,7 @@
   * [Системы сборки](#системы-сборки)
     * [Maven](#maven)
     * [Тест для самопроверки по Maven](#тест-для-самопроверки-по-maven)
-  *[Best practices in code and app architecture (pt. 1)](#best-practices-in-code-and-app-architecture-pt-1)
+  * [Best practices in code and app architecture (pt. 1)](#best-practices-in-code-and-app-architecture-pt-1)
   * [IoC, DI, Spring](#ioc-di-spring)
     * [Теоретическая информация](#теоретическая-информация)
     * [Тест для самопроверки по IoC](#тест-для-самопроверки-по-ioc)
