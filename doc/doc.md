@@ -8,6 +8,13 @@
   * [Системы сборки](#системы-сборки)
     * [Maven](#maven)
     * [Тест для самопроверки по Maven](#тест-для-самопроверки-по-maven)
+  * [IoC, DI, Spring](#ioc-di-spring)
+    * [Теоретическая информация](#теоретическая-информация)
+    * [Тест для самопроверки по IoC](#тест-для-самопроверки-по-ioc)
+    * [Задание 1](#задание-1)
+  * [Spring Boot](#spring-boot)
+    * [Почитать про Spring Boot](#почитать-про-spring-boot)
+    * [Задание 2](#задание-2)
   * [Создание проекта, структура](#создание-проекта-структура)
     * [Создание основного проекта](#создание-основного-проекта)
     * [Многомодульная структура](#многомодульная-структура)
@@ -152,7 +159,8 @@ Sourcetree.
 - компиляция и запуск модульных тестов (unit-test) вашего проекта с результатами выполнения тестов и расчетом процента покрытия;
 - установка (deploy) файлов проекта на удаленный сервер;
 - генерация документации и отчетов.
-Почитать о них можно тут: https://zhukovsd.github.io/java-backend-learning-course/technologies/build-systems/
+
+Почитать о них можно тут: [https://zhukovsd.github.io/java-backend-learning-course/technologies/build-systems/](https://zhukovsd.github.io/java-backend-learning-course/technologies/build-systems/)
 
 ### Maven
 
@@ -161,14 +169,106 @@ Maven — это инструмент для управления проекта
 стандартизированный способ управления зависимостями, компиляции, тестирования и упаковки приложений. Maven использует
 файл конфигурации `pom.xml` (Project Object Model), который описывает проект, его зависимости, плагины и цели сборки.
 Дополнительно о Maven:
-1) https://skillbox.ru/media/code/osnovy-maven-chto-eto-takoe-i-kak-rabotaet/
-2) https://habr.com/ru/articles/77382/
+1) [https://skillbox.ru/media/code/osnovy-maven-chto-eto-takoe-i-kak-rabotaet/](https://skillbox.ru/media/code/osnovy-maven-chto-eto-takoe-i-kak-rabotaet/)
+2) [https://habr.com/ru/articles/77382/](https://habr.com/ru/articles/77382/)
 
 Пример конфигурации `pom.xml` можно посмотреть в текущем проекте.
 
 ### Тест для самопроверки по Maven
 
-https://forms.gle/Mc9PgED66VZjj5XS6
+[https://forms.gle/Mc9PgED66VZjj5XS6](https://forms.gle/Mc9PgED66VZjj5XS6)
+
+## Best practices in code and app architecture (pt. 1)
+
+Мы стараемся сразу писать красивый и понятный код. Это заключается в
+- правильной организации структуры проекта,
+- must-have практиках непосредственно написания кода.
+
+Начнем с архитектуры приложения (не путать с "архитектурой решения").
+
+Луковая, гексагональная, чистая архитектура - все эти архитектуры нацелены на создание модульных и масштабируемых приложений. Все они говорят об одном - приложение необходимо делить на слои, каждый из которых выполняет строго определенный набор функций. Главная цель такого подхода - обеспечить независимость и модульность компонентов, а также четкую организацию кода для оптимизации разработки, масштабирования и поддержки приложений.
+
+Подробнее:
+1) [https://dzen.ru/a/ZQ4Tl75l7WzI9Oii](https://dzen.ru/a/ZQ4Tl75l7WzI9Oii)
+2) [https://ru.hexlet.io/courses/java-web/lessons/mvc/theory_unit](https://ru.hexlet.io/courses/java-web/lessons/mvc/theory_unit)
+3) [https://alexkosarev.name/2018/07/27/n-tier-java-part1/](https://alexkosarev.name/2018/07/27/n-tier-java-part1/) (до слов "Разработка бизнес-логики")
+
+## IoC, DI, Spring
+
+Уже много лет "Инверсия управления" считается стандартом разработки. Мы не управляем ЖЦ создания компонентов, передавая эту ответственность различным фреймворкам, мы только указываем какой-то минимальный необходимый набор параметров для создания этих самых компонентов.
+
+### Теоретическая информация
+
+1) Что же такое IoC:
+- [https://alexkosarev.name/2019/06/20/ioc-di-and-dl/](https://alexkosarev.name/2019/06/20/ioc-di-and-dl/)
+- [https://www.baeldung.com/cs/ioc](https://www.baeldung.com/cs/ioc)
+2) DI является реализацией IoC:
+- [https://apptractor.ru/info/articles/dependency-injection.html](https://apptractor.ru/info/articles/dependency-injection.html)
+- [https://habr.com/ru/articles/434380/](https://habr.com/ru/articles/434380/)
+- Краткая сборная солянка: [https://habr.com/ru/articles/131993/](https://habr.com/ru/articles/131993/)
+3) Про Spring:
+- [https://blog.skillfactory.ru/glossary/spring/](https://blog.skillfactory.ru/glossary/spring/)
+- [https://habr.com/ru/articles/490586/](https://habr.com/ru/articles/490586/)
+- [https://skillbox.ru/media/code/freymvork-spring-zachem-on-nuzhen-kak-ustroen-i-kak-rabotaet/](https://skillbox.ru/media/code/freymvork-spring-zachem-on-nuzhen-kak-ustroen-i-kak-rabotaet/)
+
+### Тест для самопроверки по IoC
+
+[https://forms.gle/Jf1cNfAFUgjFFFSP9](https://forms.gle/Jf1cNfAFUgjFFFSP9)
+
+### Задание 1
+
+Склонировать репозиторий (https://gitlab.com/kz.osu.cinimex), сделать ветки по GitFlow, все запушить.
+
+В рабочей ветке сделать каркас сервиса (т.е. пустой сервис) <имя>-ed-app на spring boot версии 3.х.х (т.е. любой 3-ий) с использованием maven 3.х.х (GroupId - kz.osu.cinimex) на 17 Java.
+
+В проект добавить 3 модуля:
+- Сервисный слой (api),
+- Слой доступа к данным (db),
+- Слой бизнес-логики (impl).
+У вас должно получиться 4 pom.xml - один родительский + 3 в модулях. Модуль бизнес логики должен видеть 2 других. Закомитить изменения, запушить ветку, сделать MR, добавить меня в reviewer.
+
+N.B.:
+- Application.java с main методом должен быть только один и располагаться в слое бизнес логики,
+- в основном проекте кроме pom.xml и мб README ничего не должно быть,
+- в api и db можно грохнуть папку test,
+- не переживайте, прямо сейчас приложение не должно ни подниматься, ни билдиться.
+
+## Spring Boot
+
+Spring — это фреймворк для Java, на котором пишут веб-приложения и микросервисы. А Spring Boot — это расширение, которое упрощает и ускоряет работу со Spring. Оно представляет собой набор утилит, автоматизирующих настройки фреймворка.
+
+Spring Boot разработан для ускорения создания веб-приложений. Он отличается от своего «родителя» тем, что не требует сложной настройки и имеет ряд встроенных инструментов, упрощающих написание кода.
+
+В отличие от базового фреймворка, он умеет:
+- упаковывать зависимости в стандартные starter-пакеты;
+- автоматически конфигурировать приложения с помощью jar-зависимостей;
+- использовать JavaConfig, что позволяет отказаться от использования XML;
+- не зависеть от множественного импорта Maven и конфликтов версий, связанных с этим;
+- обеспечивать мощную пакетную обработку и управлять конечными точками RES;
+- упрощать интеграцию с другими Java-фреймворками, такими как JPA / Hibernate ORM, Struts и так далее;
+- локально запускать встроенные HTTP-серверы, такие как Tomcat и Jetty, упрощая разработку и тестирование веб-приложений.
+
+### Почитать про Spring Boot
+
+1) [https://topjava.ru/blog/introducing-spring-boot](https://topjava.ru/blog/introducing-spring-boot)
+2) [https://gitverse.ru/blog/articles/development/198-chto-takoe-spring-boot-ego-preimushestva-i-kak-nachat-s-nim-rabotat](https://gitverse.ru/blog/articles/development/198-chto-takoe-spring-boot-ego-preimushestva-i-kak-nachat-s-nim-rabotat)
+3) [https://www.baeldung.com/spring-boot-start](https://www.baeldung.com/spring-boot-start)
+
+В статьях упоминаются сервлеты и контейнеры сервлетов, котортко о них:
+1) [https://blog.skillfactory.ru/glossary/servlet/](https://blog.skillfactory.ru/glossary/servlet/)
+2) [https://blog.skillfactory.ru/glossary/apache-tomcat/](https://blog.skillfactory.ru/glossary/apache-tomcat/)
+
+Дополнительно:
+1) [https://www.baeldung.com/spring-boot-yaml-vs-properties](https://www.baeldung.com/spring-boot-yaml-vs-properties)
+2) [https://habr.com/ru/articles/740802/](https://habr.com/ru/articles/740802/)
+
+### Задание 2
+
+1) от develop сделайте ветку feature/starters и перейдите на нее
+2) в pom слоя бизнес логики добавьте spring стартеры: главный, web, jpa, test, security, версии зависимостей должны быть в основном pom проекта, не забудьте про dependency management
+3) в папке properties добавьте файл application.yml, в нем задайте имя приложения (на ваше усмотрение)
+4) измените Application.java: поправьте main метод, чтобы запускалось spring boot приложение, на класс повесьте аннотацию @SpringBootApplication
+5) в сервисном и бизнес слоях добавьте зависимость на lombok
 
 ## Создание проекта, структура
 
