@@ -22,6 +22,8 @@
   * [БД и миграции](#бд-и-миграции)
     * [Почитать о миграциях и системах контроля версий](#почитать-о-миграциях-и-системах-контроля-версий)
     * [Задание 3](#задание-3)
+  * [ORM, JPA](#orm-jpa)
+    * [Задание 4](#задание-4)
 * [Создание проекта, структура](#создание-проекта-структура)
   * [Создание основного проекта](#создание-основного-проекта)
   * [Многомодульная структура](#многомодульная-структура)
@@ -349,6 +351,54 @@ docker run --name ed-app -p 5432:5432 -e POSTGRES_USER=sys -e POSTGRES_PASSWORD=
 mvn install liquibase:update -f <имя-модуля-db>/pom.xml -Dliquibase.host=localhost -Dliquibase.port=5432 -Dliquibase.db=postgres -Dliquibase.schema=<имя-схемы-которую-создадите> -Dliquibase.user=sys -Dliquibase.password=password
 ```
 
+## ORM, JPA
+
+Мы знаем, что в приложениях необходимо обеспечить работу с данными в терминах классов, а не таблиц данных и напротив, преобразовать термины и данные классов в данные, пригодные для хранения в СУБД. Необходимо также обеспечить интерфейс для CRUD-операций над данными. Для этого у нас есть ORM.
+
+Короткая напоминалка:
+- [https://blog.skillfactory.ru/glossary/orm/](https://blog.skillfactory.ru/glossary/orm/)
+
+Есть несколько реализаций этой технологии, в Spring мы стандартно пользуемся JPA:
+- [https://habr.com/ru/companies/otus/articles/686082/](https://habr.com/ru/companies/otus/articles/686082/)
+- [https://www.baeldung.com/the-persistence-layer-with-spring-data-jpa](https://www.baeldung.com/the-persistence-layer-with-spring-data-jpa)
+- [https://docs.spring.io/spring-data/jpa/reference/jpa/getting-started.html](https://docs.spring.io/spring-data/jpa/reference/jpa/getting-started.html)
+
+### Задание 4
+
+1) необходимо создать классы сущностей для таблиц, которые вы сделали в прошлом задании. Расставьте все аннотации, не забудьте про ограничения
+2) сделайте репозитории для созданных сущностей
+3) создайте классы (сервисы)с методами под стандартные CRUD операции, реализуйте эти операции
+
+P.S.: стандартно мы располагаем сущности в пакете entity,  репозитории в repository, сервисы в service, вспомогательные классы без бизнес логики в utils, всякие конфигурационные сервисы в config, всё, что связано с закрытием рестов, в security
+
+## Ресурсы
+
+### REST
+
+REST API (Representational State Transfer) – это архитектурный подход, описывающий рамки взаимодействия с API (распределенного приложения в сети). Это не протокол, а скорее список рекомендаций.
+
+API (Application Programming Interface) представляет собой набор определений и протоколов. Разработчики создают API-интерфейсы для взаимодействия и обмена данными одного приложения или сайта с другими. API функционирует как своеобразный шлюз или посредник между клиентами и сервером.
+
+Интерфейс API разрабатывается таким образом, чтобы программное обеспечение могло запросить определенный тип данных через сеть. Интерфейс совместим с любыми языками программирования, операционными системами, программами, сайтами, приложениями, flash и т.д.
+
+Почитать:
+- [https://systems.education/what-is-rest#showmore](https://systems.education/what-is-rest#showmore)
+- [https://skillbox.ru/media/code/rest-api-chto-eto-takoe-i-kak-rabotaet/](https://skillbox.ru/media/code/rest-api-chto-eto-takoe-i-kak-rabotaet/)
+- [https://blog.skillfactory.ru/glossary/rest-api/](https://blog.skillfactory.ru/glossary/rest-api/)
+
+### 
+
+https://sky.pro/media/razlichiya-mezhdu-dto-vo-pojo-javabeans/
+https://habr.com/ru/articles/818489/
+https://www.baeldung.com/mapstruct
+
+
+
+### Задание 5
+
+При написании Java-контроллера непосредственно реализующего структуру API следует разделять логику. Контроллеры должны быть ответственны только за прием данных и формирование ответа. Это принцип единственной ответственности или Single Responsibility principle (SOLID). Именно поэтому в модуль api мы не добавляли зависимость на impl. На практике в модуле api модуле мы создаем интерфейс, в котором описываем ресурсы, а в модуле impl - делается реализация этого интерфейса.
+
+1) создайте интерфейсы
 
 
 # Создание проекта, структура
