@@ -411,7 +411,6 @@ Springdoc OpenAPI — это библиотека, которая автомат
 - [Springdoc OpenAPI Official Documentation](https://springdoc.org/)
 - [Spring Boot + Springdoc OpenAPI Integration Example](https://www.baeldung.com/spring-rest-openapi-documentation)
 
-
 ### Задание 5
 
 При написании Java-контроллера непосредственно реализующего структуру API следует разделять логику. Контроллеры должны быть ответственны только за прием данных и формирование ответа. Это принцип единственной ответственности или Single Responsibility principle (SOLID). Именно поэтому в модуль api мы не добавляли зависимость на impl. На практике в модуле api модуле мы создаем интерфейс, в котором описываем ресурсы, а в модуле impl - делается реализация этого интерфейса.
