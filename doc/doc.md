@@ -16,9 +16,15 @@
   * [Spring Boot](#spring-boot)
     * [Почитать про Spring Boot](#почитать-про-spring-boot)
     * [Задание 2](#задание-2)
-  * [Создание проекта, структура](#создание-проекта-структура)
-    * [Создание основного проекта](#создание-основного-проекта)
-    * [Многомодульная структура](#многомодульная-структура)
+  * [Best practices in code and app architecture (pt. 2)](#best-practices-in-code-and-app-architecture-pt-2)
+    * [Что считаем красивым кодом](#что-считаем-красивым-кодом)
+    * [Тест для самопроверки по BP](#тест-для-самопроверки-по-bp)
+  * [БД и миграции](#бд-и-миграции)
+    * [Почитать о миграциях и системах контроля версий](#почитать-о-миграциях-и-системах-контроля-версий)
+    * [Задание 3](#задание-3)
+* [Создание проекта, структура](#создание-проекта-структура)
+  * [Создание основного проекта](#создание-основного-проекта)
+  * [Многомодульная структура](#многомодульная-структура)
   * [Liquibase](#liquibase)
   * [JWT (JSON Web Tokens)](#jwt-json-web-tokens)
   * [Apache Kafka](#apache-kafka)
@@ -271,9 +277,83 @@ Spring Boot разработан для ускорения создания ве
 4) измените Application.java: поправьте main метод, чтобы запускалось spring boot приложение, на класс повесьте аннотацию @SpringBootApplication
 5) в сервисном и бизнес слоях добавьте зависимость на lombok
 
-## Создание проекта, структура
+## Best practices in code and app architecture (pt. 2)
 
-### Создание основного проекта
+### Что считаем красивым кодом
+
+1) О коде, все мб и не запомните, но какие-то простые вещи быстро ложатся в голову:
+- [https://www.baeldung.com/java-clean-code](https://www.baeldung.com/java-clean-code)
+- [https://docs.oracle.com/cd/A97688_16/generic.903/bp/java.htm](https://docs.oracle.com/cd/A97688_16/generic.903/bp/java.htm)
+- [https://blog.jetbrains.com/idea/2024/02/java-best-practices/](https://blog.jetbrains.com/idea/2024/02/java-best-practices/)
+- [https://www.tatvasoft.com/blog/java-best-practices/](https://www.tatvasoft.com/blog/java-best-practices/)
+- [https://habr.com/ru/companies/piter/articles/676394/](https://habr.com/ru/companies/piter/articles/676394/)
+
+Кроме того, нужно в IDEa поставить себе плагин SonarLint - это обертка над SonarQube(платформа для непрерывного анализа и измерения качества программного кода, разработанную компанией SonarSource). Сейчас SonarQube является чем-то вроде отраслевого стандарта. В своей работе SonarQube использует статический анализ кода: реальное его выполнение не требуется, так как анализируются именно «исходники». Предмет анализа этого инструмента — потенциальные ошибки и уязвимости, стандарты оформления кода, наличие тестов и уровень покрытия ими, а также дублирование кода и его поддерживаемость. Будет вам "в прямом эфире" помогать писать красиво.
+
+2) Весьма приветствуется писать код в функциональном стиле.
+- [https://skillbox.ru/media/base/funktsionalnye_interfeysy_i_lyambda_vyrazheniya_v_java/](https://skillbox.ru/media/base/funktsionalnye_interfeysy_i_lyambda_vyrazheniya_v_java/)
+- [https://struchkov.dev/blog/ru/optional-in-java/](https://struchkov.dev/blog/ru/optional-in-java/)
+- [https://habr.com/ru/articles/658457/](https://habr.com/ru/articles/658457/)
+- [https://skillbox.ru/media/base/java-stream-api-kopilka-retseptov/](https://skillbox.ru/media/base/java-stream-api-kopilka-retseptov/)
+- [https://youtu.be/Fswgne8y0GY?si=tB-DFQ_TupxliaOD](https://youtu.be/Fswgne8y0GY?si=tB-DFQ_TupxliaOD)
+- [https://www.youtube.com/live/3qrNlWkJ3ac?si=rA-xBYkFMPWJlG_s](https://www.youtube.com/live/3qrNlWkJ3ac?si=rA-xBYkFMPWJlG_s)
+- [https://www.baeldung.com/java-8-streams](https://www.baeldung.com/java-8-streams)
+- [https://www.tpointtech.com/java-8-stream](https://www.tpointtech.com/java-8-stream) - как напоминалка, что есть (см. раздел Core Operations Over Streams)
+
+### Тест для самопроверки по BP
+
+[https://forms.gle/t8zrEoNkGX2nArr98](https://forms.gle/t8zrEoNkGX2nArr98)
+
+## БД и миграции
+
+По мере разработки и поддержки приложения база данных изменяется: добавляются таблицы, столбцы и т.д. В современных проектах тех. требования вырабатываются поэтапно, поэтому очень маловероятно, что вы сможете с самого начала точно угадать со структурой модели базы данных. Изменения, которые мы делаем в базе данных, меняют способ хранения в ней информации, устанавливают новые способы хранения или удаляют хранилище, которое больше не нужно. Для упрощения отслеживания этих изменений существуют специальные системы, управляющие миграциями БД.
+
+Самое простое объяснение - это аналог git, только версионированию подвергнута структура базы данных, в некоторых случаях ее базовое наполнение. Миграции слой за слоем последовательно “накатываются” в базу данных в известном порядке. Если в базе уже есть часть выполненных миграций, то будут использоваться только новые.
+Информация, какие миграции были применены к базе данных, по умолчанию находится в этой же БД, в специальной таблице.
+
+### Почитать о миграциях и системах контроля версий
+
+- [https://struchkov.dev/blog/ru/get-started-liquibase/](https://struchkov.dev/blog/ru/get-started-liquibase/)
+- [https://tproger.ru/articles/migracii-baz-dannyh-s-pomoshhju-biblioteki-liquibase](https://tproger.ru/articles/migracii-baz-dannyh-s-pomoshhju-biblioteki-liquibase)
+- [https://habr.com/ru/companies/otus/articles/532978/](https://habr.com/ru/companies/otus/articles/532978/)
+- [https://www.baeldung.com/liquibase-vs-flyway](https://www.baeldung.com/liquibase-vs-flyway)
+- [https://for-each.dev/lessons/b/-liquibase-refactor-schema-of-java-app](https://for-each.dev/lessons/b/-liquibase-refactor-schema-of-java-app)
+- [https://habr.com/ru/articles/540500/](https://habr.com/ru/articles/540500/)
+
+Мы будем работать в наших проектах с liquibase:
+- [Liquibase Official Documentation](https://www.liquibase.org/documentation/index.html)
+
+### Задание 3
+
+1) добавьте в проект зависимость на postgres и liquibase
+2) в модуле db в пакете resources создайте:
+- скрипт с созданием схемы базы данных (назовите на свое усмотрение)
+- пакет db_changelog, в котором расположите миграции для БД
+3) с помощью liquibase создайте таблицы как на рисунке, продумайте возможные индексы
+
+![](Схема БД.png)
+
+P.S.: будет очень хорошо, если вы в docker поднимите контейнер с postgres:
+
+```
+docker run --name ed-app -p 5432:5432 -e POSTGRES_USER=sys -e POSTGRES_PASSWORD=password postgres:13.3
+```
+
+здесь: ed-app - имя контейнера, 5432 - стандартный порт, который занимает postgres (5432:5432 - это прокидывание порта из контейнера на такой же порт основного пространства вашего компа), POSTGRES_USER - root пользователь, POSTGRES_PASSWORD - root пароль, postgres:13.3 - имя образа с указанием версии
+
+когда поднимите контейнер с postgres, добавьте в application.yml информацию об источнике данных (datasource).
+
+Запустить миграции без запуска проекта можно командой:
+
+```
+mvn install liquibase:update -f <имя-модуля-db>/pom.xml -Dliquibase.host=localhost -Dliquibase.port=5432 -Dliquibase.db=postgres -Dliquibase.schema=<имя-схемы-которую-создадите> -Dliquibase.user=sys -Dliquibase.password=password
+```
+
+
+
+# Создание проекта, структура
+
+## Создание основного проекта
 
 Создадим новое Spring Boot приложения с использованием Maven.
 
@@ -331,25 +411,6 @@ Spring Boot разработан для ускорения создания ве
 структуры:
 
 ![](004.png)
-
-## Liquibase
-
-**Описание:**
-Liquibase — это инструмент для управления версиями базы данных, который позволяет отслеживать, управлять и применять
-изменения схемы базы данных. Он поддерживает различные типы баз данных и позволяет автоматизировать процесс миграции.
-
-Все миграции в микросервисе должны находиться в модуле `-db` в папке `resources`. Пример пустой миграции находится
-текущем проекте. Запустить миграции можно командой:
-
-```
-mvn install liquibase:update -f firstapp-db/pom.xml -Dliquibase.host=localhost -Dliquibase.port=5432 -Dliquibase.db=db_name -Dliquibase.schema=frstapp -Dliquibase.user=postgres -Dliquibase.password=postgres
-```
-
-подставив переменные для своей БД.
-
-**Полезные ссылки:**
-
-- [Liquibase Official Documentation](https://www.liquibase.org/documentation/index.html)
 
 ## JWT (JSON Web Tokens)
 
