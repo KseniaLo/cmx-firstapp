@@ -547,11 +547,11 @@ Spring Security значительно упрощает защиту корпо�
 
 ### Авторизация
 
-[https://www.baeldung.com/spring-security-expressions](https://www.baeldung.com/spring-security-expressions)
-[https://docs.spring.io/spring-security/site/docs/4.0.x/reference/html/el-access.html](https://docs.spring.io/spring-security/site/docs/4.0.x/reference/html/el-access.html)
-[https://sysout.ru/zashhita-metodov-annotatsiya-preauthorize/](https://sysout.ru/zashhita-metodov-annotatsiya-preauthorize/)
-[https://www.geeksforgeeks.org/difference-between-hasrole-and-hasauthority-in-spring-security/](https://www.geeksforgeeks.org/difference-between-hasrole-and-hasauthority-in-spring-security/)
-[https://www.baeldung.com/spring-security-custom-filter](https://www.baeldung.com/spring-security-custom-filter)
+- [https://www.baeldung.com/spring-security-expressions](https://www.baeldung.com/spring-security-expressions)
+- [https://docs.spring.io/spring-security/site/docs/4.0.x/reference/html/el-access.html](https://docs.spring.io/spring-security/site/docs/4.0.x/reference/html/el-access.html)
+- [https://sysout.ru/zashhita-metodov-annotatsiya-preauthorize/](https://sysout.ru/zashhita-metodov-annotatsiya-preauthorize/)
+- [https://www.geeksforgeeks.org/difference-between-hasrole-and-hasauthority-in-spring-security/](https://www.geeksforgeeks.org/difference-between-hasrole-and-hasauthority-in-spring-security/)
+- [https://www.baeldung.com/spring-security-custom-filter](https://www.baeldung.com/spring-security-custom-filter)
 
 ### Тест для самопроверки по Spring Security
 
